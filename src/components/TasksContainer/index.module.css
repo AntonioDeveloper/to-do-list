@@ -1,0 +1,52 @@
+section {
+  width: 100%;
+  height: calc(100vh - 200px);
+}
+
+.tasksContainer {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 70px;
+}
+
+.statusBar {
+  display: flex;
+  justify-content: space-between
+}
+
+.createdTasks,
+.concludedTasks {
+  font-family: var(--inter-bold);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.createdTasks span,
+.concludedTasks span {
+  border-radius: 25px;
+  background: var(--gray-400);
+  color: var(--gray-200);
+  padding: 2px 8px;
+}
+
+.createdTasks {
+  color: var(--blue);
+}
+
+.concludedTasks {
+  color: var(--purple);
+}
+
+.tasks {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.tasks img {
+  margin-bottom: 16px;
+}
+
+.tasks p {
+  color: var(--gray-300);
+}

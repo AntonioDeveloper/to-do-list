@@ -1,9 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import './global.css';
+import { Header } from './components/Header/Header';
+import { AddTaskBar } from './components/AddTaskBar/AddTaskBar';
+import { TasksContainer } from './components/TasksContainer/TasksContainer';
 
 export function App() {
   return (
-    <h1>Hello World</h1>
+    <>
+      <Header />
+      <AddTaskBar />
+      <TasksContainer />
+    </>
   )
 }
 
