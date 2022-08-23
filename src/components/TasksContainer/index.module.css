@@ -50,3 +50,7 @@ section {
 .tasks p {
   color: var(--gray-300);
 }
+
+.taskDescription {
+  color: #fff;
+}

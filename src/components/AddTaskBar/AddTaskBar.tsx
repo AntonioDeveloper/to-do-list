@@ -1,13 +1,18 @@
 import styles from './index.module.css'
+import { ChangeEvent, useState, useEffect, MouseEvent } from 'react';
 
-export function AddTaskBar() {
-  const submitButton = document.querySelector("button[type=submit]");
-  const inputTask = document.querySelector("input[name=nova-tarefa]") as HTMLInputElement | null;
+interface Tasks {
+  isComplete: boolean;
+  task: string;
+}
 
-  function handleNewTask() {
-    event?.preventDefault();
-    console.log(inputTask?.value);
-  }
+interface AddTaskBarProps {
+  TaskHandler: (event: MouseEvent<HTMLButtonElement>) => Tasks[];
+  InputChangeHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+  InputValue: string;
+}
+
+export function AddTaskBar({ TaskHandler, InputChangeHandler, InputValue }: AddTaskBarProps) {
 
   return (
     <>
@@ -16,9 +21,13 @@ export function AddTaskBar() {
           type="text"
           placeholder="Adicione uma nova tarefa"
           name="nova-tarefa"
-          className={styles.input} />
-        <button type="submit" onClick={handleNewTask}>Criar</button>
+          className={styles.input}
+          value={InputValue}
+          onChange={InputChangeHandler}
+        />
+        <button type="submit" onClick={TaskHandler}>Criar</button>
       </form>
     </>
   )
 }
+
