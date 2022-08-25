@@ -1,20 +1,14 @@
 import styles from './index.module.css';
 import imgClipBoard from '../../assets/Clipboard.svg';
 import { AddTaskBar } from '../AddTaskBar/AddTaskBar';
-import { useState, MouseEvent, ChangeEvent } from 'react';
+import { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
 import { Task } from '../Task/Task';
-
-interface Tasks {
-  isComplete: boolean;
-  task: string;
-}
-
-//let tasksArray: Tasks[] = [];
 
 export function TasksContainer() {
 
   const [inputValue, setInputValue] = useState("");
   const [isComplete, setIsComplete] = useState(false);
+  const [choosenTask, setChoosenTask] = useState(0);
   const [arrayExists, setArrayExists] = useState(false);
   const [tasksArray, setTaskArray] = useState<Array<{
     isComplete: boolean,
@@ -33,12 +27,36 @@ export function TasksContainer() {
     const task = inputValue;
 
     //tasksArray.push({ isComplete, task });
-    setTaskArray((state) => [...state, { isComplete: false, task: task }]);
+    setTaskArray((state) => [...state, { isComplete: isComplete, task: task }]);
     setArrayExists(true);
 
-    console.log(tasksArray);
+    //console.log(tasksArray);
     return tasksArray;
   }
+
+  let el: HTMLElement;
+  let idEl: number;
+
+  function handleTaskStatus(event: MouseEvent<HTMLButtonElement>) {
+    event?.preventDefault();
+
+    el = event?.target as HTMLElement;
+    idEl = Number(el.id);
+
+    setIsComplete(!isComplete);
+    setChoosenTask(idEl);
+    tasksArray[idEl].isComplete = isComplete;
+    //console.log(tasksArray[idEl])
+    return isComplete;
+  }
+
+  useEffect(() => {
+    if (tasksArray[choosenTask]) {
+      console.log(isComplete);
+      tasksArray[choosenTask].isComplete = isComplete;
+      console.log(tasksArray);
+    }
+  }, [isComplete]);
 
   return (
     <section>
@@ -57,7 +75,7 @@ export function TasksContainer() {
               Crie tarefas e organize seus itens a fazer
             </p>
           )
-            : <Task tarefas={tasksArray} />
+            : <Task tarefas={tasksArray} status={handleTaskStatus} />
           }
         </div>
       </div>
