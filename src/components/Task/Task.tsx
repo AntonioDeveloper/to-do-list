@@ -1,5 +1,7 @@
 import styles from './index.module.css';
 import { MouseEvent } from 'react';
+import checkMark from '../../assets/check.png';
+import trashBin from '../../assets/check.png';
 
 interface Task {
   isComplete: boolean;
@@ -14,21 +16,17 @@ interface LineTasks {
 
 export function Task({ tarefas, status }: LineTasks) {
 
-  // const btnClicked = document.querySelectorAll(`.${styles.checkMark}`);
-
-  // if (btnClicked) {
-  //   btnClicked.forEach(btn => btn?.addEventListener("click", function () {
-  //     let value = btn?.getAttribute("id");
-  //     console.log(value);
-  //   }))
-  // }
-
   return (
     <>
       {tarefas.map((tarefa, i) => {
         return (
-          <div key={i}>
-            <button className={styles.checkMark} onClick={status} id={i.toString()}>{tarefa.isComplete} {i}</button>
+          <div key={i} className={`${styles.taskLine}`}>
+            <button className={styles.checkMark} onClick={status} id={i.toString()}>
+              {
+                tarefa.isComplete == true ?
+                  <img src={checkMark} /> : <img src="" />
+              }
+            </button>
             <div className={styles.taskDescription}>{tarefa.task}</div>
           </div>
         )

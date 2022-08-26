@@ -25,7 +25,7 @@ export function AddTaskBar({ TaskHandler, InputChangeHandler, InputValue }: AddT
           value={InputValue}
           onChange={InputChangeHandler}
         />
-        <button type="submit" onClick={TaskHandler}>Criar</button>
+        <button type="submit" onClick={TaskHandler} className={`${styles.createTask}`}>Criar</button>
       </form>
     </>
   )

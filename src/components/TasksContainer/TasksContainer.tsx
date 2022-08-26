@@ -47,6 +47,7 @@ export function TasksContainer() {
 
     setChoosenTask(idEl);
     tasksArray[idEl].isComplete = !tasksArray[idEl].isComplete;
+    console.log(idEl)
     console.log(tasksArray[idEl])
 
   }

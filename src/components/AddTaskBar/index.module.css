@@ -34,7 +34,7 @@ input {
   margin-right: 8px;
 }
 
-button {
+.createTask {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -56,11 +56,11 @@ button {
   line-height: 140%;
 }
 
-button::after {
+.createTask::after {
   content: url("../../assets/plus.svg");
   padding-top: 4px;
 }
 
-button:hover {
+.createTask:hover {
   background: var(--blue);
 }
