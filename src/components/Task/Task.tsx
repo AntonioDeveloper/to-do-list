@@ -8,7 +8,7 @@ interface Task {
 
 interface LineTasks {
   tarefas: Task[];
-  status: (event: MouseEvent<HTMLButtonElement>) => boolean;
+  status: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 

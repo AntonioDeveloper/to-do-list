@@ -7,7 +7,7 @@ import { Task } from '../Task/Task';
 export function TasksContainer() {
 
   const [inputValue, setInputValue] = useState("");
-  const [isComplete, setIsComplete] = useState(false);
+  //const [isComplete, setIsComplete] = useState(false);
   const [choosenTask, setChoosenTask] = useState(0);
   const [arrayExists, setArrayExists] = useState(false);
   const [tasksArray, setTaskArray] = useState<Array<{
@@ -27,7 +27,7 @@ export function TasksContainer() {
     const task = inputValue;
 
     //tasksArray.push({ isComplete, task });
-    setTaskArray((state) => [...state, { isComplete: isComplete, task: task }]);
+    setTaskArray((state) => [...state, { isComplete: false, task: task }]);
     setArrayExists(true);
 
     //console.log(tasksArray);
@@ -37,26 +37,19 @@ export function TasksContainer() {
   let el: HTMLElement;
   let idEl: number;
 
+
+
   function handleTaskStatus(event: MouseEvent<HTMLButtonElement>) {
     event?.preventDefault();
 
     el = event?.target as HTMLElement;
     idEl = Number(el.id);
 
-    setIsComplete(!isComplete);
     setChoosenTask(idEl);
-    tasksArray[idEl].isComplete = isComplete;
-    //console.log(tasksArray[idEl])
-    return isComplete;
-  }
+    tasksArray[idEl].isComplete = !tasksArray[idEl].isComplete;
+    console.log(tasksArray[idEl])
 
-  useEffect(() => {
-    if (tasksArray[choosenTask]) {
-      console.log(isComplete);
-      tasksArray[choosenTask].isComplete = isComplete;
-      console.log(tasksArray);
-    }
-  }, [isComplete]);
+  }
 
   return (
     <section>
