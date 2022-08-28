@@ -37,8 +37,6 @@ export function TasksContainer() {
   let el: HTMLElement;
   let idEl: number;
 
-
-
   function handleTaskStatus(event: MouseEvent<HTMLButtonElement>) {
     event?.preventDefault();
 
@@ -47,9 +45,32 @@ export function TasksContainer() {
 
     setChoosenTask(idEl);
     tasksArray[idEl].isComplete = !tasksArray[idEl].isComplete;
-    console.log(idEl)
+    // console.log(idEl)
     console.log(tasksArray[idEl])
+    let changeStatus = tasksArray[idEl].isComplete;
+    if (changeStatus) {
+      console.log("clicado")
+    } else {
+      console.log("não clicado");
+    }
 
+    return changeStatus
+  }
+
+  function deleteTask(event: MouseEvent<HTMLButtonElement>) {
+
+    let trash = event?.target as HTMLElement;
+    let idTrash = Number(trash.id);
+    const selectedTask = JSON.stringify(tasksArray[idTrash]);
+    console.log(tasksArray);
+
+    console.log(`Deletando ${selectedTask}`);
+
+    const updatedTaskArray = tasksArray.filter(task => {
+      return JSON.stringify(task) !== selectedTask;
+    })
+    console.log("Novo array", updatedTaskArray);
+    setTaskArray(updatedTaskArray);
   }
 
   return (
@@ -69,7 +90,7 @@ export function TasksContainer() {
               Crie tarefas e organize seus itens a fazer
             </p>
           )
-            : <Task tarefas={tasksArray} status={handleTaskStatus} />
+            : <Task tarefas={tasksArray} status={handleTaskStatus} deleteTask={deleteTask} />
           }
         </div>
       </div>

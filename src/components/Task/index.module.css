@@ -1,5 +1,6 @@
 .taskDescription {
   color: #fff;
+  max-width: 450px;
 }
 
 .checkMark {
@@ -9,6 +10,8 @@
   border-radius: 50px;
   border: 2px solid var(--blue);
   background: var(--gray-600);
+
+  cursor: pointer;
 }
 
 .checkMark img {
@@ -22,6 +25,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
   padding: 16px;
   gap: 12px;
 
@@ -31,4 +35,9 @@
   border: 1px solid #333333;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
   border-radius: 8px;
+}
+
+.trashBin {
+  background-color: #262626;
+  cursor: pointer;
 }
