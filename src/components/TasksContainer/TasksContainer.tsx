@@ -7,8 +7,9 @@ import { Task } from '../Task/Task';
 export function TasksContainer() {
 
   const [inputValue, setInputValue] = useState("");
-  //const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState(0);
   const [choosenTask, setChoosenTask] = useState(0);
+  const [createdTasks, setCreatedTasks] = useState(0);
   const [arrayExists, setArrayExists] = useState(false);
   const [tasksArray, setTaskArray] = useState<Array<{
     isComplete: boolean,
@@ -34,6 +35,10 @@ export function TasksContainer() {
     return tasksArray;
   }
 
+  useEffect(() => {
+    setCreatedTasks(tasksArray.length);
+  }, [tasksArray]);
+
   let el: HTMLElement;
   let idEl: number;
 
@@ -49,8 +54,10 @@ export function TasksContainer() {
     console.log(tasksArray[idEl])
     let changeStatus = tasksArray[idEl].isComplete;
     if (changeStatus) {
+      setIsComplete(value => value + 1);
       console.log("clicado")
     } else {
+      setIsComplete(value => value - 1);
       console.log("não clicado");
     }
 
@@ -62,15 +69,16 @@ export function TasksContainer() {
     let trash = event?.target as HTMLElement;
     let idTrash = Number(trash.id);
     const selectedTask = JSON.stringify(tasksArray[idTrash]);
-    console.log(tasksArray);
 
-    console.log(`Deletando ${selectedTask}`);
 
     const updatedTaskArray = tasksArray.filter(task => {
       return JSON.stringify(task) !== selectedTask;
     })
-    console.log("Novo array", updatedTaskArray);
+
     setTaskArray(updatedTaskArray);
+    if (JSON.parse(selectedTask).isComplete == true) {
+      setIsComplete(value => value - 1);
+    }
   }
 
   return (
@@ -78,8 +86,8 @@ export function TasksContainer() {
       <AddTaskBar TaskHandler={handleNewTask} InputChangeHandler={handleChange} InputValue={inputValue} />
       <div className={styles.tasksContainer}>
         <div className={styles.statusBar}>
-          <p className={styles.createdTasks}>Tarefas Criadas <span>0</span></p>
-          <p className={styles.concludedTasks}>Concluídas <span>0</span></p>
+          <p className={styles.createdTasks}>Tarefas Criadas <span>{createdTasks}</span></p>
+          <p className={styles.concludedTasks}>Concluídas <span>{isComplete}</span></p>
         </div>
         <div className={styles.tasks}>
           {arrayExists == false ? (
