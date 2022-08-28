@@ -54,9 +54,11 @@ export function TasksContainer() {
     console.log(tasksArray[idEl])
     let changeStatus = tasksArray[idEl].isComplete;
     if (changeStatus) {
+      el.classList.add(styles.checkMarkChecked);
       setIsComplete(value => value + 1);
       console.log("clicado")
     } else {
+      el.classList.remove(styles.checkMarkChecked);
       setIsComplete(value => value - 1);
       console.log("não clicado");
     }

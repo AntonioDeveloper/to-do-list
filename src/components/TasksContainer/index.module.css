@@ -50,3 +50,8 @@ section {
 .tasks p {
   color: var(--gray-300);
 }
+
+.checkMarkChecked {
+  background-color: var(--purple-dark) !important;
+  border: none !important;
+}
