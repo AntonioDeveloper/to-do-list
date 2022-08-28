@@ -66,8 +66,15 @@ export function TasksContainer() {
 
   function deleteTask(event: MouseEvent<HTMLButtonElement>) {
 
+    //PARA conseguir pegar o atributo ID do elemento HTML que vem com o evevto, 
+    //foi necessário convertê-lo em elemento HTML
     let trash = event?.target as HTMLElement;
     let idTrash = Number(trash.id);
+
+    //Foi necessário transformar o JSON em string para que pudesse ser,
+    //posteriormente, comparado ao outro JSON (task), que também virou string
+    //para que os tipos fossem os mesmos. Caso contrário, o TYpescript acusaria 
+    //conflito de tipos, com o objeto contendo mais de um tipo.
     const selectedTask = JSON.stringify(tasksArray[idTrash]);
 
 
